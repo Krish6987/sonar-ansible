@@ -1,0 +1,11 @@
+---
+
+- name: create symlink of user folder
+  file:
+    src: /'{{ host_user }}'
+    dest: '{{ project_root }}'
+    state: link
+  ignore_errors: yes
+
+- name: start at Projects folder
+  shell: echo 'cd {{ project_root }}' >> ~/.zshrc

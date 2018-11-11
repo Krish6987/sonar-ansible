@@ -1,0 +1,44 @@
+---
+- hosts: sonar
+  vars:
+    db_user: vagrant
+    db_password: password
+    # app_database_name: user_app
+    host_user: "{{ lookup('env','USER') }}"
+    project_root: "~/project"
+    project_path: "{{ project_root }}"
+    sdkman_script_install_url: http://get.sdkman.io
+    sdkman_folder: "~/.sdkman"
+    sonar_version: 7.4
+    sonar_db_user: sonar
+    sonar_db_pass: password
+
+    roles:
+    - role: jdauphant.ssl-certs
+      ssl_certs_local_cert_data: "{{vault_cert_data}}"
+      ssl_certs_local_privkey_data: "{{vault_privkey_data}}"
+    - role: jdauphant.nginx
+      nginx_configs:
+        ssl:
+        - ssl_certificate_key {{ssl_certs_privkey_path}}
+        - ssl_certificate     {{ssl_certs_cert_path}}
+      nginx_sites:
+        default:
+          template: sonar/sonar.conf.j2
+          server_name: sonar.entelect.co.za
+
+  tasks:
+    - name: make sure the system encoding is utf-8
+      become: yes
+      template:
+        src: templates/locale
+        dest: /etc/default/locale
+        owner: root
+        group: root
+        mode: 0644
+
+    - include_tasks: tasks/apt.yml
+    - include_tasks: tasks/oh-my-zshell.yml
+    - include_tasks: tasks/java.yml
+    - include_tasks: tasks/postgresql.yml
+    - include_tasks: tasks/sonar.yml
