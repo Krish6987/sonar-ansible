@@ -1,0 +1,31 @@
+---
+- name: update apt
+  become: yes
+  apt: update_cache=yes
+
+- name: install base packages
+  apt: pkg={{ item }} state=latest
+  become: yes
+  with_items:
+    - git-core
+    - curl
+    - zlib1g-dev
+    - build-essential
+    - libssl-dev
+    - libreadline-dev
+    - libyaml-dev
+    - libsqlite3-dev
+    - sqlite3
+    - vim
+    - libxml2-dev
+    - libxslt1-dev
+    - libcurl4-openssl-dev
+    - nfs-common
+    - xvfb
+    - libqt4-dev
+    - libqtwebkit-dev
+    - nginx
+    - htop
+    - python
+    - python-pip
+    - python-psycopg2

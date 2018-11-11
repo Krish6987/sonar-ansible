@@ -26,8 +26,9 @@
     - libqtwebkit-dev
     - nginx
     - htop
-    - python3
-    - python3-pip
+    - python
+    - python-pip
+    - python-psycopg2
 # https://github.com/thoughtbot/capybara-webkit/issues/513
     # - qt5-default
     # - libqt5webkit5-dev

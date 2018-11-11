@@ -7,3 +7,13 @@
 - name: jdauphant.ssl-certs
   version: v1.6
   src: jdauphant.ssl-certs
+
+- src: geerlingguy.java
+
+- src: geerlingguy.jenkins
+
+- src: geerlingguy.git
+
+- src: tecris.maven
+
+- src: geerlingguy.ansible

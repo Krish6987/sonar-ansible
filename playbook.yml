@@ -12,20 +12,20 @@
     sonar_version: 7.4
     sonar_db_user: sonar
     sonar_db_pass: password
+    server_name: sonar.labs.com
 
-    roles:
-    - role: jdauphant.ssl-certs
-      ssl_certs_local_cert_data: "{{vault_cert_data}}"
-      ssl_certs_local_privkey_data: "{{vault_privkey_data}}"
+  roles:
+    - role: base
+      become: yes
+    # - role: jdauphant.ssl-certs
+    #   become: yes
+    #   ssl_certs_local_cert_data: "{{vault_cert_data}}"
+    #   ssl_certs_local_privkey_data: "{{vault_privkey_data}}"
     - role: jdauphant.nginx
-      nginx_configs:
-        ssl:
-        - ssl_certificate_key {{ssl_certs_privkey_path}}
-        - ssl_certificate     {{ssl_certs_cert_path}}
+      become: yes
       nginx_sites:
         default:
           template: sonar/sonar.conf.j2
-          server_name: sonar.entelect.co.za
 
   tasks:
     - name: make sure the system encoding is utf-8
@@ -37,7 +37,6 @@
         group: root
         mode: 0644
 
-    - include_tasks: tasks/apt.yml
     - include_tasks: tasks/oh-my-zshell.yml
     - include_tasks: tasks/java.yml
     - include_tasks: tasks/postgresql.yml

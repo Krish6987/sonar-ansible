@@ -1,4 +1,4 @@
-# Sonar server + Java project setup
+# Application Lifecile management with Jenkins + Sonar + Ansible
 
 ## Requirements
 
@@ -59,7 +59,17 @@ mvn sonar:sonar \
   -Dsonar.host.url=http://52.207.217.64:9000 \
   -Dsonar.login=7de9efcb0af6923f86a55a17ceae1d8efa23114e
 
+# Quality gate
+
+https://docs.sonarqube.org/latest/user-guide/quality-gates/
+
+# Pipelineflow
+
+https://www.redhat.com/en/blog/integrating-ansible-jenkins-cicd-process
+
 ### References
+https://github.com/ricardozanini/vagrant-alm
+https://www.redhat.com/en/blog/integrating-ansible-jenkins-cicd-process
 https://medium.com/@mattpwest/setting-up-sonarqube-with-ansible-fcabadee6953
 https://docs.sonarqube.org/7.4/analysis/analysis-parameters/
 https://github.com/eugenp/tutorials/tree/master/cas/cas-secured-app

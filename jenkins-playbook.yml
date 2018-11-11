@@ -1,0 +1,22 @@
+---
+- name: Deploy Jenkins CI
+  hosts: jenkins
+  become: yes
+
+  roles:
+    - role: geerlingguy.java
+      when: "ansible_os_family == 'Debian'"
+      java_packages:
+        - openjdk-8-jdk
+    - role: geerlingguy.jenkins
+    - role: geerlingguy.git
+    - role: tecris.maven
+    - role: geerlingguy.ansible
+
+# - name: Select openjdk 8 as system default java
+#   alternatives:
+#   name: java
+#   path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+
+  # sudo apt purge openjdk-11-jdk
+  # sudo rm -rf /usr/lib/jvm/java-1.11.0-openjdk-amd64

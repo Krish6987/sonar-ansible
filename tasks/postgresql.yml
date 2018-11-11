@@ -23,7 +23,6 @@
   with_items:
     - postgresql-common
     - postgresql-9.6
-    - python-psycopg2
     - libpq-dev
     - ptop
 
@@ -33,12 +32,12 @@
     name: postgresql
     state: started
 
-- name: Create user database application
-  become: yes
-  become_user: postgres
-  postgresql_user:
-    name: "{{ db_user }}"
-    password: "{{ db_password }}"
+# - name: Create user database application
+#   become: yes
+#   become_user: postgres
+#   postgresql_user:
+#     name: "{{ db_user }}"
+#     password: "{{ db_password }}"
 
 # - name: Create database application
 #   become: yes
