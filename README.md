@@ -1,4 +1,4 @@
-# Application Lifecile management with Jenkins + Sonar + Ansible
+# Application Lifecicle management with Jenkins + Sonar + Ansible
 
 ## Requirements
 
