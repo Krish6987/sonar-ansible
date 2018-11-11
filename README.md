@@ -28,6 +28,8 @@ Go to project dir:
 cd project_root_dir
 ```
 
+# Setup Sonar
+
 Run ansible on sonar instance:
 ```sh
 ansible-playbook playbook.yml -u ubuntu
@@ -58,6 +60,12 @@ java-project: 7de9efcb0af6923f86a55a17ceae1d8efa23114e
 mvn sonar:sonar \
   -Dsonar.host.url=http://52.207.217.64:9000 \
   -Dsonar.login=7de9efcb0af6923f86a55a17ceae1d8efa23114e
+
+# Setup Jenkins
+
+```sh
+ansible-playbook jenkins-playbook.yml -u ubuntu
+```
 
 # Quality gate
 
