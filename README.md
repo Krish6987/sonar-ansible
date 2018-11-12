@@ -55,16 +55,21 @@ pass: admin
 - Set maven plugin
 
 ex:
+Create a project on Sonar dashbvoard:
+
 java-project: 7de9efcb0af6923f86a55a17ceae1d8efa23114e
 
+Build project:
+```
+mvn package
+```
+
+Generate report:
+
+```
 mvn sonar:sonar \
   -Dsonar.host.url=http://52.207.217.64:9000 \
   -Dsonar.login=7de9efcb0af6923f86a55a17ceae1d8efa23114e
-
-# Setup Jenkins
-
-```sh
-ansible-playbook jenkins-playbook.yml -u ubuntu
 ```
 
 # Quality gate
