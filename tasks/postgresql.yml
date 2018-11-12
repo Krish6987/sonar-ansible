@@ -1,28 +1,25 @@
 # https://www.commandprompt.com/blog/managing_pg_hbaconf_with_ansible/
 # https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e
 ---
+- name: Add Postgres Repo
+  become: yes
+  apt_repository:
+    repo: 'deb https://apt.postgresql.org/pub/repos/apt/ precise-pgdg main'
+    state: present
+
 - name: add postgres trusted key
   become: yes
   apt_key:
     url: https://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc
     state: present
 
-- name: Add Postgres Repo
-  become: yes
-  apt_repository:
-    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main'
-    state: present
-
-- name: update apt
-  apt: update_cache=yes
-  become: yes
-
-- name: Install Postgresql 9.6
+- name: Install Postgresql 9.5
   apt: pkg={{ item }} allow_unauthenticated=yes
   become: yes
   with_items:
     - postgresql-common
-    - postgresql-9.6
+    - postgresql-9.5
+    - python-psycopg2
     - libpq-dev
     - ptop
 
@@ -32,12 +29,12 @@
     name: postgresql
     state: started
 
-# - name: Create user database application
-#   become: yes
-#   become_user: postgres
-#   postgresql_user:
-#     name: "{{ db_user }}"
-#     password: "{{ db_password }}"
+- name: Create user database application
+  become: yes
+  become_user: postgres
+  postgresql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
 
 # - name: Create database application
 #   become: yes
@@ -49,7 +46,7 @@
 - name: Enables password authentication method
   become: yes
   replace:
-    dest: /etc/postgresql/9.6/main/pg_hba.conf
+    dest: /etc/postgresql/9.5/main/pg_hba.conf
     regexp: "^local\\s*all\\s*all\\s*peer$"
     replace: "local   all             all            md5"
 
@@ -58,21 +55,3 @@
   service:
     name: postgresql
     state: reloaded
-
-############################################################
-# sudo update-rc.d postgresql enable
-#### Postgresql remote acces for development mode
-# $ sudo vim /etc/postgresql/9.6/main/postgresql.conf
-## listen_addresses = '*'
-
-# $ sudo vim /etc/postgresql/9.6/main/pg_hba.conf
-## host     all             all             all           md5
-
-# $psql -U vagrant -d postgres
-## \password
-## type db_user_name
-## type the new password
-## type the new password again
-## type \q
-# $ sudo service postgresql restart
-############################################################

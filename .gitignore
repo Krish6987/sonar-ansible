@@ -25,3 +25,13 @@
 /.nb-gradle/
 .mvn
 .vscode
+roles/geerlingguy.ansible/
+roles/geerlingguy.git/
+roles/geerlingguy.java/
+roles/geerlingguy.jenkins/
+roles/jdauphant.nginx/
+roles/jdauphant.ssl-certs/
+roles/tecris.maven/
+.vagrant/
+*.log
+playbook.retry

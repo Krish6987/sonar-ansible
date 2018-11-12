@@ -1,5 +1,5 @@
 ---
-- hosts: sonar
+- hosts: all
   vars:
     db_user: vagrant
     db_password: password
@@ -17,15 +17,11 @@
   roles:
     - role: base
       become: yes
-    # - role: jdauphant.ssl-certs
-    #   become: yes
-    #   ssl_certs_local_cert_data: "{{vault_cert_data}}"
-    #   ssl_certs_local_privkey_data: "{{vault_privkey_data}}"
     - role: jdauphant.nginx
       become: yes
       nginx_sites:
         default:
-          template: sonar/sonar.conf.j2
+          template: templates/sonar/sonar.conf.j2
 
   tasks:
     - name: make sure the system encoding is utf-8
@@ -41,3 +37,4 @@
     - include_tasks: tasks/java.yml
     - include_tasks: tasks/postgresql.yml
     - include_tasks: tasks/sonar.yml
+    # - include_tasks: tasks/jenkins.yml

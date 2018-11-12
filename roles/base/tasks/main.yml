@@ -20,12 +20,9 @@
     - libxml2-dev
     - libxslt1-dev
     - libcurl4-openssl-dev
+    - python-software-properties
     - nfs-common
     - xvfb
     - libqt4-dev
     - libqtwebkit-dev
-    - nginx
     - htop
-    - python
-    - python-pip
-    - python-psycopg2
