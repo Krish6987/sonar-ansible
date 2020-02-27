@@ -1,0 +1,11 @@
+---
+- hosts: sonar
+  become: true
+
+  tasks:
+
+  - name: install wget
+    yum: pkg='wget' state=installed
+
+  - name: install sonarqube
+    yum: pkg='java-1.8.0-openjdk' state=installed
